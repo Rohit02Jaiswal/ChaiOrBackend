@@ -103,3 +103,7 @@ we can send req in 3 ways :
 ## Middleware
 ---> Middleware stand between the request and response. It is used for verify the token. It has three parameters : req, res and next.
 
+## What is .env ? setup and run .env file in node.
+It store the environment variable for better security. For configuration you must install the dotenv package in your terminal. npm i dotenv
+To access the .env in your app, you must add the script 'require("dotenv").config();'
+"process" keyword is used to access the data from .env file.

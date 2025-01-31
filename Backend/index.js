@@ -50,6 +50,9 @@ const express = require('express');
 const { profileToken } = require('./Middleware/profileMiddleware');
 const app = express();
 
+require("dotenv").config();
+// console.log(`Token: ${process.env.myToken}`);
+
 app.use(express.json()); // it is mandatory if app use any type of json request.
 
 // Creating token
@@ -98,4 +101,4 @@ app.post('/profile', profileToken, (req, res) => { // post not supported on brow
     // res.send(req.body);
 })
 
-app.listen("8000");
+app.listen(process.env.PORT);
