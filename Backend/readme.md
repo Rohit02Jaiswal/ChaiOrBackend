@@ -63,3 +63,39 @@ let server = http.createServer((req, res) => {
 });
 server.listen("8000");  // http//localhost:8000
 ```
+
+# Express Js Introduction and Installation.
+---> Express.js is a lightweight and flexible Node.js web application framework. It simplify building web applications and APIs by providing a robust set of features.
+
+### Features: 
+1) **Routing:** Define application routes using HTTP methods (GET, POST, PUT, DELETE, etc). Supports dynamic and nested routes.
+
+2) **Middleware:** Functions executed in the req-res cycle.
+
+3) **Templating:** Integrates with templating engine like EJS, Pug, handlebars to generate dynamic HTML.
+
+4) **RESTful API support:** Ideal for creating RESTful services with clean and organized code. Simplify handling JSON and form data.
+
+**Structure your project with MVC for maintenability**
+
+To install the express: run "npm i express"
+
+---> **Setup the express server in index file**
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send("Express server done.");
+})
+
+app.listen("8000");
+```
+
+## Routing, Routing Params (Request and Response)
+If we want to send the data securely, we use post method. You can store large amount of data using post method.
+
+we can send req in 3 ways :
+1) Body meyhod
+2) Query method
+3) using params (dynamic routing)
