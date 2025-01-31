@@ -47,15 +47,37 @@
 
 /* Server Setup with Express framework */
 const express = require('express');
+const { profileToken } = require('./Middleware/profileMiddleware');
 const app = express();
 
 app.use(express.json()); // it is mandatory if app use any type of json request.
 
+// Creating token
+// let myToken = "123"
+
+// app.use((req, res, next) => {
+//     // console.log("Middleware.");
+//     console.log(req.query.token);
+//     if(req.query.token == "" || req.query.token == undefined){
+//         return res.send({
+//             status: 404,
+//             msg: "Please match the token!",
+//         })
+//     }
+//     if(req.query.token != myToken){
+//         return res.send({
+//             status: 0,
+//             msg: "Wrong Token!",
+//         })
+//     }
+//     next();
+// })
+
 app.get('/', (req, res) => {
-    res.send("Express server done.");
+    res.send({server: "Express server done.", queryData: req.query});
 })
 
-app.post('/profile', (req, res) => { // post not supported on browser thats why we use postman/thunder-client
+app.post('/profile', profileToken, (req, res) => { // post not supported on browser thats why we use postman/thunder-client
     // Creating an object 
     let profile = {
         id: 1,

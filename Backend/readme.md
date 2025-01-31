@@ -99,3 +99,7 @@ we can send req in 3 ways :
 1) Body meyhod
 2) Query method
 3) using params (dynamic routing)
+
+## Middleware
+---> Middleware stand between the request and response. It is used for verify the token. It has three parameters : req, res and next.
+
