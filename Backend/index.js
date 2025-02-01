@@ -48,12 +48,16 @@
 /* Server Setup with Express framework */
 const express = require('express');
 const { profileToken } = require('./Middleware/profileMiddleware');
+const connectDB = require('./connectDB');
 const app = express();
 
 require("dotenv").config();
 // console.log(`Token: ${process.env.myToken}`);
 
 app.use(express.json()); // it is mandatory if app use any type of json request.
+
+// Database connection
+connectDB();
 
 // Creating token
 // let myToken = "123"

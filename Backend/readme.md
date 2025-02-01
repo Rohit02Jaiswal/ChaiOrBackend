@@ -107,3 +107,50 @@ we can send req in 3 ways :
 It store the environment variable for better security. For configuration you must install the dotenv package in your terminal. npm i dotenv
 To access the .env in your app, you must add the script 'require("dotenv").config();'
 "process" keyword is used to access the data from .env file.
+
+# Introduction to MongoDB.
+1) MongoDB is a document database. It is designed for high volume data storage.
+2) MongoDB is most commonly used with node.js 
+3) MongoDB provides powerful aggregation.
+
+## nstallation of MongoDB
+1) Download the MongoDB community version.
+2) Install it on your local system. By default it will gives you a MongoDB compass for database management. 
+3) Initially use the mongodb compass in local but if you want to use it on cloud then go with the mongodb Atlas.
+4) Open the compass and create a new connection. Now you are able to perform the CRUD operation.
+
+### MongoDB command CheatSheet
+[cheatsheet](https://gist.github.com/bradtraversy/f407d642bdc3b31681bc7e56d95485b6)
+
+## Connect MongoDB with Nodejs (Insert and View API)
+
+## Introduction to mongoose for mongodb and crud operation.
+---> Mongoose is an ODM (Object Data Modelling) library for MongoDB.
+
+**Connect database using mongoose library.**
+
+```js
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.dbURL);
+        console.log("MongoDB Connected.");
+    } catch (error) {
+        console.error(error.message);
+        process.exit(1);
+    }
+}
+module.exports = connectDB;
+```
+
+**Use it on index file/call the connectDB function in index.js file for database connection.**
+
+```js
+const connectDB = require('./connectDB');
+// Database connection
+connectDB();
+```
+
