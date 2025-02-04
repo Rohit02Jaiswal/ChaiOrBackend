@@ -1,10 +1,23 @@
 import React from 'react'
 import { Button, Checkbox, Label, Textarea, TextInput } from "flowbite-react";
+import axios from 'axios';
 
 const EnquiryForm = () => {
     const saveEnquiry = (e) => {
         e.preventDefault();
         console.log("Log Saved.");
+        // For API hit, use axios
+        let formData = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            message: e.target.msg.value,
+        }
+
+        axios.post('http://localhost:5000/api/web/enquiry/insert', formData)
+        .then((res) => {
+            console.log(res.data);
+        })
     }
     return (
         <div className="form bg-gray-200 p-4 mt-8">
