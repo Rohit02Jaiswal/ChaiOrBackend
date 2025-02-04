@@ -49,6 +49,7 @@
 const express = require('express');
 const { profileToken } = require('./Middleware/profileMiddleware');
 const connectDB = require('./connectDB');
+const enquiryModel = require('./models/enquiry.model');
 const app = express();
 
 require("dotenv").config();
@@ -103,6 +104,48 @@ app.post('/profile', profileToken, (req, res) => { // post not supported on brow
     res.send({profileData: profile, bodyData: req.body, queryData: req.query});
     // console.log(req.body);  
     // res.send(req.body);
+})
+
+app.post('/api/enquiry-insert', async (req, res) => {
+    let {name, email, mobile, message} = req.body;
+    // res.send({name, email, mobile, message});
+    let enquiry = new enquiryModel({
+        name: name,
+        email: email,
+        phone: mobile,
+        message: message,
+    });
+    enquiry.save().then(() => {
+        res.send({status: 1, msg: "Data inserted successfully!"});
+    }).catch((err) => {
+        res.send({status: 0, msg: "Something is wrong, Insert again", error: err});
+    })
+
+    console.log(enquiry);
+})
+
+app.get('/api/enquiry-list', async (req, res) => {
+    let enquiryList = await enquiryModel.find();
+    res.status(200).json({status: 1, message: "Enquiry List", data: enquiryList});
+})
+
+app.delete('/api/enquiry-delete/:id', async (req, res) => {
+    let enqId = req.params.id;
+    let deletedEnq = await enquiryModel.deleteOne({_id:enqId});
+    res.send({status: 1, message: "Enquiry deleted successfully!", id: enqId, data: deletedEnq});
+})
+
+app.put('/api/enquiry-update/:id', async (req, res) => {
+    let enqId = req.params.id;
+    let {name, email, mobile, message} = req.body;
+    let updateObj = {
+        name: name,
+        email: email,
+        phone: mobile,
+        message: message,
+    }
+    let updateData = await enquiryModel.updateOne({_id: enqId}, updateObj);
+    res.send({status: 1, msg: "Data updated successfully!", updateData});
 })
 
 app.listen(process.env.PORT);
