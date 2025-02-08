@@ -15,4 +15,22 @@ let enqInsert = (req, res) => {
     })
 }
 
-module.exports = {enqInsert};
+let enqList = async (req, res) => {
+    let enquiry = await enquiryModel.find();
+    res.send({status: 1, enquiryList: enquiry});
+}
+
+let deleteEnq = async (req, res) => {
+    let enqId = req.params.id;
+    console.log(enqId)
+    let enq = await enquiryModel.deleteOne({_id: enqId});
+    res.send({status: 1, message: "Data deleted Successfully!", enq});
+}
+
+let fetchUpdate = async (req, res) => {
+    let updateId = req.params.id;
+    let updateView = await enquiryModel.findOne({_id: updateId});
+    res.send({status: 1, message: "Updated Successfull!", updateView});
+}
+
+module.exports = {enqInsert, enqList, deleteEnq, fetchUpdate};
